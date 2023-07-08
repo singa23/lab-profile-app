@@ -19,10 +19,12 @@ const userSchema = new Schema(
         'Lisbon',
         'Remote',
       ],
+      required: true,
     },
     course: {
       type: String,
       enum: ['Web Dev', 'UX/UI', 'Data Analytics', 'Cyber Security'],
+      required: true,
     },
     image: String,
   },
