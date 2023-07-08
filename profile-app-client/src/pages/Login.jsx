@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/auth.context';
 
 const API_URL = 'http://localhost:5005';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { storeToken } = useContext(AuthContext);
 
   const handleInputUsername = (e) => {
     setUsername(e.target.value);
@@ -24,6 +27,10 @@ function Login() {
     axios
       .post(`${API_URL}/auth/login`, body)
       .then((response) => {
+        const token = response.data.authToken;
+
+        storeToken(token);
+
         navigate('/');
       })
       .catch((err) => console.log(err));
