@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require('../models/User.model');
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 
+const fileUploader = require('../config/cloudinary.config');
+
 // PUT /api/users
 router.put('/users', isAuthenticated, (req, res, next) => {
   console.log('req.payload', req.payload);
